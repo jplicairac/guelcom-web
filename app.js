@@ -266,7 +266,7 @@ document.addEventListener('click',function(e){
  if(el.dataset.chip){var k=el.dataset.chip,i=chips.indexOf(k);if(i>=0)chips.splice(i,1);else chips.push(k);render();return}
  if(el.dataset.rm){cart.splice(+el.dataset.rm,1);lsSet('gw_cart',cart);render();openCart();return}
  if(el.dataset.seelist){verLista=el.dataset.seelist;$('dr').classList.remove('open');render();return}
- if(el.dataset.sharelist){var n=el.dataset.sharelist;window.open(wa(t('waLista')+' “'+n+'” — Güelcom Stays:\n'+lists[n].map(function(id){var x=byId(id);return x?'• '+x.titulo+' — '+abnb(x):''}).join('\n')),'_blank');return}
+ if(el.dataset.sharelist){var n=el.dataset.sharelist;openShare(n,t('shLista')+' “'+n+'”',urlLista(n));return}
  if(el.dataset.dellist){delete lists[el.dataset.dellist];lsSet('gw_lists',lists);if(verLista===el.dataset.dellist)verLista='';render();openLists();return}
  if(el.hasAttribute('data-clrlist')){verLista='';render();return}
  if(el.dataset.open){openDetail(el.dataset.open)}
@@ -278,9 +278,43 @@ $('bCur').onchange=function(){cur$=this.value;lsSet('gw_cur',cur$);paint()};
 $('vL').onclick=function(){vista='lista';render()}; $('vM').onclick=function(){vista='mapa';render()};
 ['tipoF','zona','ci','co','hue','hab','ban','ord'].forEach(function(i){$(i).addEventListener('change',render)});
 $('clr').onclick=function(){$('tipoF').value='';$('ci').value='';$('co').value='';$('zona').value='';$('hue').value=0;$('hab').value=0;$('ban').value='';chips=[];verLista='';showNA=false;render()};
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDetail();['ask','lp','md','dr'].forEach(function(i){$(i).classList.remove('open')})}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDetail();['ask','lp','md','dr','sh'].forEach(function(i){$(i).classList.remove('open')})}});
+
+/* ---- Compartir: anuncio, búsqueda y listas (enlaces a guelcom.co) ---- */
+var BASE='https://guelcom.co/';
+Object.assign(TX.es,{compartir:'Compartir',shT:'Compartir',shW:'WhatsApp',shC:'Copiar enlace',shN:'Más opciones',copiado:'Enlace copiado',compartirP:'Compartir',compartirB:'Compartir búsqueda',listaComp:'Lista compartida',shLista:'Mira mi lista',shBusq:'Mira estas opciones en Güelcom Stays',shProp:'Mira este lugar en Güelcom Stays'});
+Object.assign(TX.en,{compartir:'Share',shT:'Share',shW:'WhatsApp',shC:'Copy link',shN:'More options',copiado:'Link copied',compartirP:'Share',compartirB:'Share search',listaComp:'Shared list',shLista:'Check out my list',shBusq:'Check out these stays at Güelcom Stays',shProp:'Check out this place at Güelcom Stays'});
+Object.assign(TX.fr,{compartir:'Partager',shT:'Partager',shW:'WhatsApp',shC:'Copier le lien',shN:"Plus d'options",copiado:'Lien copié',compartirP:'Partager',compartirB:'Partager la recherche',listaComp:'Liste partagée',shLista:'Regarde ma liste',shBusq:'Regarde ces logements sur Güelcom Stays',shProp:'Regarde ce logement sur Güelcom Stays'});
+function qs(o){var a=[];for(var k in o){var v=o[k];if(Array.isArray(v))v=v.join(',');if(v!==''&&v!=null&&v!==0&&v!=='0')a.push(k+'='+encodeURIComponent(v))}return a.length?'?'+a.join('&'):''}
+function urlBusq(){var s=state();return BASE+qs({tp:s.tp,z:s.z,ci:s.ci,co:s.co,g:s.g,h:s.h,b:s.b,o:s.o,am:chips})}
+function urlProp(x){return BASE+qs({p:x.id,ci:sel.ci,co:sel.co,g:+$('dG').value||''})}
+function urlLista(n){return BASE+qs({l:n,ids:lists[n]||[]})}
+var shTxt='',shUrl='';
+function openShare(titulo,txt,url){shTxt=txt;shUrl=url;$('shP').textContent=titulo;$('shU').value=url;$('shW').href='https://wa.me/?text='+encodeURIComponent(txt+'\n'+url);$('shN').style.display=navigator.share?'':'none';$('sh').classList.add('open')}
+$('shC').onclick=function(){var ok=function(){toast(t('copiado'))};var fb=function(){$('shU').select();try{document.execCommand('copy');ok()}catch(e){}};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(shUrl).then(ok,fb);else fb()};
+$('shN').onclick=function(){navigator.share({title:'Güelcom Stays',text:shTxt,url:shUrl}).catch(function(){})};
+$('shX').onclick=function(){$('sh').classList.remove('open')};
+$('sh').addEventListener('click',function(e){if(e.target.id==='sh')$('sh').classList.remove('open')});
+$('dShare').onclick=function(){openShare(cur.titulo,t('shProp')+': '+cur.titulo,urlProp(cur))};
+$('bShareS').onclick=function(){openShare(t('compartirB'),t('shBusq'),urlBusq())};
+function aplicarEnlace(){
+ var q;try{q=new URLSearchParams(location.search)}catch(e){return}
+ if(!q.toString())return;
+ var set=function(id,k){var v=q.get(k);if(v==null)return;var el=$(id);if([].some.call(el.options||[],function(o){return o.value===v}))el.value=v};
+ set('tipoF','tp');set('zona','z');set('hue','g');set('hab','h');set('ban','b');set('ord','o');
+ var ci=q.get('ci')||'',co=q.get('co')||'',re=/^\d{4}-\d{2}-\d{2}$/;
+ if(re.test(ci)&&re.test(co)&&ci>=today&&co>ci){$('ci').value=ci;$('co').value=co}
+ chips=(q.get('am')||'').split(',').filter(function(k){return CHIPS.indexOf(k)>=0});
+ var n=(q.get('l')||'').trim().slice(0,60);
+ if(n){var ids=(q.get('ids')||'').split(',').filter(function(id){return byId(id)});
+  if(ids.length){var a=lists[n]||(lists[n]=[]);ids.forEach(function(id){if(a.indexOf(id)<0)a.push(id)});lsSet('gw_lists',lists);verLista=n;toast(t('listaComp')+': '+n)}}
+ render();
+ var p=q.get('p');if(p&&byId(p))openDetail(p);
+ try{history.replaceState(null,'',location.pathname)}catch(e){}
+}
 $('y').textContent=new Date().getFullYear(); $('upd').textContent=D.updated;
 paint();
+aplicarEnlace();
 })();
 
 (function(){

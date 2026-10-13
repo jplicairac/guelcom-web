@@ -24,12 +24,12 @@
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="app.css?v=6">
+<link rel="stylesheet" href="app.css?v=7">
 </head>
 <body>
 <header>
 <div class="wrap top">
-<a class="brand" href="./"><img src="logo-blanco.png?v=6" alt="Güelcom Stays" width="140" height="88"></a>
+<a class="brand" href="./"><img src="logo-blanco.png?v=7" alt="Güelcom Stays" width="140" height="88"></a>
 <div class="tb">
 <select class="pill sm lang" id="bLang" aria-label="Idioma / Language / Langue"><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option></select>
 <select class="pill sm lang" id="bCur" aria-label="Moneda / Currency"><option value="USD">US$</option><option value="DOP">RD$</option></select>
@@ -57,7 +57,7 @@
 </div></div>
 <main class="wrap">
 <div class="bar"><div class="count" id="cnt"></div>
-<div class="br"><label class="chk" id="naBox"><input type="checkbox" id="naChk"> <span id="naTxt"></span></label>
+<div class="br"><button class="lnk" id="bShareS" type="button" data-t="compartirB"></button><label class="chk" id="naBox"><input type="checkbox" id="naChk"> <span id="naTxt"></span></label>
 <label class="srt"><span data-t="orden"></span> <select id="ord"></select></label><div class="vt"><button type="button" id="vL" data-t="lista"></button><button type="button" id="vM" data-t="mapa"></button></div></div></div>
 <section class="grid" id="g"></section>
 <div id="mapW" class="mapw" style="display:none"><div id="map"></div></div>
@@ -84,6 +84,7 @@
 <button class="add" id="dAdd" type="button" data-t="agregar"></button>
 <div class="two"><button class="add" id="dAskA" type="button" data-t="pregA"></button><button class="add" id="dAskW" type="button" data-t="pregW"></button></div>
 <div class="two"><button class="add" id="dFav" type="button" data-t="guardar"></button><button class="add" id="dAlert" type="button" data-t="avisame"></button></div>
+<button class="add" id="dShare" type="button" data-t="compartirP"></button>
 </div></div>
 </div>
 </div></div>
@@ -93,9 +94,10 @@
 <div class="modal" id="lp"><div class="mbox"><h3 data-t="lpT"></h3><div id="lpB"></div><div class="two"><input type="text" id="lpN" data-tp="lpN"><button class="add" id="lpAdd" type="button" data-t="crear"></button></div><button class="cta" id="lpC" type="button" data-t="listo"></button></div></div>
 <div class="modal" id="own"><div class="mbox wide" id="owB"></div></div>
 <div class="modal" id="md"><div class="mbox"><h3 data-t="mdT"></h3><p id="mdP"></p><input type="text" id="mdN" data-tp="nombre"><input type="email" id="mdE" data-tp="correo"><button class="cta" id="mdS" type="button" data-t="avisarme"></button><button class="lnk" id="mdC" type="button" data-t="cancelar"></button></div></div>
+<div class="modal" id="sh"><div class="mbox"><h3 data-t="shT"></h3><p id="shP"></p><input type="text" id="shU" readonly aria-label="URL"><div class="two"><a class="cta" id="shW" target="_blank" rel="noopener" data-t="shW"></a><button class="add" id="shC" type="button" data-t="shC"></button></div><button class="add" id="shN" type="button" data-t="shN"></button><button class="lnk" id="shX" type="button" data-t="cancelar"></button></div></div>
 <div class="toast" id="toast"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data.js?v=6"></script>
-<script src="app.js?v=6"></script>
+<script src="data.js?v=7"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>
