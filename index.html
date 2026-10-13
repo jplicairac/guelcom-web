@@ -25,12 +25,12 @@
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="app.css?v=12">
+<link rel="stylesheet" href="app.css?v=13">
 </head>
 <body>
 <header>
 <div class="wrap top">
-<a class="brand" href="./"><img src="logo-blanco.png?v=10" alt="Güelcom Stays" width="140" height="88"></a>
+<a class="brand" href="./"><img src="logo-blanco.svg?v=13" alt="Güelcom Stays" width="140" height="88"></a>
 <div class="tb">
 <select class="pill sm lang" id="bLang" aria-label="Idioma / Language / Langue"><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option></select>
 <select class="pill sm lang" id="bCur" aria-label="Moneda / Currency"><option value="USD">US$</option><option value="DOP">RD$</option></select>
@@ -41,7 +41,9 @@
 </div>
 <div class="wrap hero">
 <h1><span data-t="h1a"></span><em data-t="h1b"></em></h1>
-<p data-t="sub"></p>
+<p class="hs" data-t="tipos"></p>
+<div class="hz"><span>🏙️ Santo Domingo</span><span>⛳ Cap Cana</span><span>🏖️ Bávaro</span><span>⛰️ Jarabacoa</span><span>🌊 Juan Dolio</span></div>
+<div class="hb"><span data-t="b1"></span><span data-t="b2"></span><span data-t="b3"></span></div>
 </div>
 </header>
 <div class="sticky"><div class="wrap">
@@ -99,6 +101,6 @@
 <div class="toast" id="toast"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="data.js?v=10"></script>
-<script src="app.js?v=10"></script>
+<script src="app.js?v=13"></script>
 </body>
 </html>
