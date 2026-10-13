@@ -273,7 +273,7 @@ document.addEventListener('click',function(e){
 });
 $('naChk').addEventListener('change',function(){showNA=this.checked;render()});
 $('bCart').onclick=openCart; $('bFav').onclick=openLists; $('drX').onclick=function(){$('dr').classList.remove('open')};
-$('bLang').onchange=function(){lang=this.value;lsSet('gw_lang',lang);paint()};
+$('bLang').onchange=function(){lang=this.value;lsSet('gw_lang',lang);paint();fijarChips()};
 $('bCur').onchange=function(){cur$=this.value;lsSet('gw_cur',cur$);paint()};
 $('vL').onclick=function(){vista='lista';render()}; $('vM').onclick=function(){vista='mapa';render()};
 ['tipoF','zona','ci','co','hue','hab','ban','ord'].forEach(function(i){$(i).addEventListener('change',render)});
@@ -313,8 +313,11 @@ function aplicarEnlace(){
  try{history.replaceState(null,'',location.pathname)}catch(e){}
 }
 $('y').textContent=new Date().getFullYear(); $('upd').textContent=D.updated;
+function fijarChips(){try{var s=document.querySelector('.sticky'),c=$('chips');if(!s||!c)return;document.documentElement.style.setProperty('--fh',Math.max(0,Math.round(c.getBoundingClientRect().top-s.getBoundingClientRect().top))+'px')}catch(e){}}
+window.addEventListener('resize',fijarChips);window.addEventListener('load',fijarChips);
 paint();
 aplicarEnlace();
+fijarChips();
 })();
 
 (function(){
