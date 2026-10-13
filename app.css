@@ -177,8 +177,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .lang option:checked{background:#00B74F;color:#fff}
 
 #own{z-index:70}
-.sticky .chips{margin:0;padding:10px 2px;background:var(--crema2);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.sticky .chips{margin:0;padding:10px 2px;background:var(--crema2);flex-wrap:wrap;gap:8px}
 .sticky .chips::-webkit-scrollbar{display:none}
 .sticky .chips>*{flex:0 0 auto}
 .bar{margin-top:8px}
 @media(max-width:640px){.top{padding-top:14px}}
+@media(max-width:640px){.sticky .chips{gap:5px;padding:8px 0}.sticky .chip{padding:5px 9px;font-size:12.5px;border-width:1px}}
