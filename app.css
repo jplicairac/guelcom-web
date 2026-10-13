@@ -7,7 +7,7 @@ header{background:var(--negro);color:#fff}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:22px;padding-bottom:4px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{height:64px;width:auto;display:block}
+.brand img{height:88px;width:auto;display:block}
 .brand .stays{color:var(--verde);font-weight:800;font-size:15px;letter-spacing:2.5px;text-transform:uppercase;border-left:2px solid #4a524a;padding-left:12px}
 .tb{display:flex;gap:8px;align-items:center}
 .pill{background:transparent;border:1.5px solid #4a524a;color:#fff;font-weight:700;padding:9px 14px;border-radius:999px;font-size:14px;cursor:pointer;white-space:nowrap}
@@ -157,7 +157,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .lp small{color:var(--gris)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--negro);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;display:none;z-index:50}
 @media(max-width:980px){.filters{grid-template-columns:1fr 1fr 1fr}.filters .z{grid-column:1/-1}.filters button{grid-column:1/-1}.dcols{grid-template-columns:1fr}.box{position:static}}
-@media(max-width:640px){.wa-top{display:none}.brand img{height:50px}.filters{grid-template-columns:1fr 1fr}.cal{grid-template-columns:1fr}.cal .mo+.mo{display:none}.gal{grid-template-columns:1fr;grid-template-rows:220px}.gal img:not(.big){display:none}.gal img.big{grid-row:auto}.sticky{position:static}}
+@media(max-width:640px){.wa-top{display:none}.brand img{height:64px}.filters{grid-template-columns:1fr 1fr}.cal{grid-template-columns:1fr}.cal .mo+.mo{display:none}.gal{grid-template-columns:1fr;grid-template-rows:220px}.gal img:not(.big){display:none}.gal img.big{grid-row:auto}.sticky{position:static}}
 
 .vt{display:flex;border:1.5px solid #cfd6cf;border-radius:10px;overflow:hidden}
 .vt button{border:0;background:#fff;padding:7px 14px;font-weight:700;cursor:pointer;color:var(--negro)}
